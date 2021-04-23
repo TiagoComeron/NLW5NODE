@@ -28,9 +28,15 @@ class MessagesController {
         const messagesService = new MessagesService();
 
         try {
-            const info = await messagesService.listByUser(id);
-            console.log(info.list)
-            return res.json(info.list)
+            const {list, email} = await messagesService.listByUser(id);
+            console.log(list)
+            // return res.json({
+            //     email:email,
+            //     list: [list]})
+            return res.json({
+                email:email,
+                list:[(await list)]
+            }) 
         } catch (error) {
             return res.status(400).json({erro:error.message})
         }
