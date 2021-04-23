@@ -35,8 +35,6 @@ class MessagesService {
     async listByUser( user_id:string ){
         const list = this.messagesRepository.find({user_id});
 
-        console.log(list)
-
         const email = (await getCustomRepository(UsersRepository).findOne(user_id)).email
         
         return {list, email}
